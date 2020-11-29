@@ -248,7 +248,7 @@ func (i *ignore) Absolute(path string, isdir bool) Match {
 	}
 	
 	// extract the relative path of this file
-        _rel, err := filepath.Rel(r.Base(), path)
+        _rel, err := filepath.Rel(i._base, path)
 	if err != nil {
 		return nil
 	}
