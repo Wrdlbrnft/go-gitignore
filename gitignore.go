@@ -246,10 +246,12 @@ func (i *ignore) Absolute(path string, isdir bool) Match {
 	if !strings.HasPrefix(path, i._base) {
 		return nil
 	}
-
+	
 	// extract the relative path of this file
-	_prefix := len(i._base) + 1
-	_rel := string(path[_prefix:])
+        _rel, err := filepath.Rel(r.Base(), path)
+	if err != nil {
+		return nil
+	}
 	return i.Relative(_rel, isdir)
 } // Absolute()
 
